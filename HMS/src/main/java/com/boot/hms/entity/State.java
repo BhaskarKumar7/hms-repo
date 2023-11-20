@@ -26,12 +26,12 @@ public class State {
 	@SequenceGenerator(sequenceName = "seq_state",
 	initialValue = 1,schema = AppConstants.DB_SCHEMA,name = "state_generator",allocationSize = 1)
 	@Column(name = "id")
-	private Integer id;
+	private Integer stateId;
 	@Column(name = "name",unique = true,nullable = false)
 	private String  name;
 	@Column(name = "state_code",unique = true,nullable = false)
 	private String stateCode;
 	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "country_id",nullable = false)
-	private Country countryId;
+	private Country country;
 }

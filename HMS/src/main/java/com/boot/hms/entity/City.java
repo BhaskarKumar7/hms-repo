@@ -23,10 +23,10 @@ public class City {
 	allocationSize = 1,schema = AppConstants.DB_SCHEMA,name = "city_generator")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "city_generator")
 	@Column(name = "id")
-	private Integer id;
+	private Integer cityId;
 	@Column(name = "name",unique = true,nullable = false)
 	private String name;
 	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "state_id",nullable = false)
-	private State stateId;
+	private State state;
 }
