@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>SuperAdmin Login</title>
+<title>Staff Login</title>
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link rel="preconnect" href="https://fonts.gstatic.com/">
 <link
@@ -29,7 +29,7 @@
 								<div class="col-md-8 ps-md-0">
 									<div class="auth-form-wrapper px-4 py-5">
 										<a href="#" class="noble-ui-logo d-block mb-2">Kumkumadi<span>HMS</span></a>
-										<h5 class="text-muted fw-normal mb-4">Super Admin Login</h5>
+										<h5 class="text-muted fw-normal mb-4"> Staff Login</h5>
 										<form class="forms-sample">
 											<div class="mb-3">
 												<label for="userEmail" class="form-label">Username</label> <input
