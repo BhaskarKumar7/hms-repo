@@ -3,10 +3,13 @@ package com.boot.hms.entity;
 import java.time.LocalDateTime;
 
 import com.boot.hms.constants.AppConstants;
+import com.boot.hms.enums.AddressTypeEnum;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,7 +33,8 @@ public class Address {
 	@Column(name = "address_line",unique = true,nullable = false)
 	private String addressLine;
 	@Column(name = "address_type",nullable = false)
-	private String addressType;
+	@Enumerated(EnumType.STRING)
+	private AddressTypeEnum addressType;
 	@Column(name = "created_time",nullable = false)
 	private LocalDateTime createdTime;
 	@Column(name = "door_no",nullable = false)
