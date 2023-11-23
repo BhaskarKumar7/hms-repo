@@ -7,17 +7,35 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.boot.hms.dto.CityDto;
+import com.boot.hms.dto.CountryDto;
+import com.boot.hms.dto.StateDto;
+import com.boot.hms.service.CityService;
+import com.boot.hms.service.CountryService;
+import com.boot.hms.service.StateService;
+
 @RequestMapping("/superadmin")
 @Controller
 public class SuperAdminController {
 
+	@Autowired
+	private CountryService countryService;
+	@Autowired
+	private StateService stateService;
+	@Autowired
+	private CityService cityService;
+	
 	@GetMapping("/login")
 	public String getLoginPage() {
 		return "superadmin/login";
@@ -84,5 +102,38 @@ public class SuperAdminController {
 		}
 		responseMap.put("days", daysList);
 		return responseMap;
+	}
+	
+	@GetMapping("/fetchCountries")
+	@ResponseBody
+	public Map<String, List<CountryDto>> fetchCountries(){
+		Map<String, List<CountryDto>> responseMap = new HashMap<>();
+		List<CountryDto> dtoList = countryService.readAllCountries();
+		responseMap.put("countries", dtoList);
+		return responseMap;
+	}
+	
+	@PostMapping("/fetchStates")
+	public ResponseEntity<?> fetchStates(@RequestBody Map<String, Integer> reqPayload){
+		Map<String, List<StateDto>> responseMap = new HashMap<>();
+		List<StateDto> dtoList =stateService.readAllStatesByCountryId(reqPayload.get("countryId"));
+		if(CollectionUtils.isEmpty(dtoList))	{
+			return new ResponseEntity<>("We are sorry, no states found for this country!", HttpStatus.BAD_REQUEST);
+		}else	{
+			responseMap.put("states", dtoList);
+			return new ResponseEntity<>(responseMap, HttpStatus.OK);
+		}
+	}
+	
+	@PostMapping("/fetchCities")
+	public ResponseEntity<?> fetchCities(@RequestBody Map<String, Integer> reqPayload){
+		Map<String, List<CityDto>> responseMap = new HashMap<>();
+		List<CityDto> dtoList = cityService.readAllCitiesByStateId(reqPayload.get("stateId"));
+		if(CollectionUtils.isEmpty(dtoList)) {
+			return new  ResponseEntity<>("We are Sorry,no cities found for this state",HttpStatus.BAD_REQUEST);
+		}else {
+			responseMap.put("cities", dtoList);
+			return new  ResponseEntity<>(responseMap,HttpStatus.OK);
+		}
 	}
 }

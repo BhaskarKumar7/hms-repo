@@ -14,6 +14,8 @@
 <link rel="stylesheet" href="resources/css/iconfont.css">
 <link rel="stylesheet" href="resources/css/flag-icon.min.css">
 <link rel="stylesheet" href="resources/css/style.min.css">
+<link rel="stylesheet" href="resources/css/sweetalert2.min.css">
+<!-- <link rel="stylesheet" href="resources/css/select2.min.css"> -->
 <link rel="shortcut icon" href="resources/images/favicon.png" />
 </head>
 <body>
@@ -61,12 +63,11 @@
 			<jsp:include page="header.jsp"></jsp:include>
 			<div class="page-content">
 				<div class="row">
-					<div class="col-md-12 grid-margin stretch-card">
+					<div class="col-lg-12 grid-margin stretch-card">
 						<div class="card">
 							<div class="card-body">
 								<h6 class="card-title">Add personal details</h6>
 								<form>
-
 									<div class="mb-3">
 										<label for="userName" class="form-label">User
 											Name</label> <input type="text" class="form-control form-control-sm"
@@ -100,20 +101,20 @@
 									<h6 style="text-align: center;color: purple;">Date of birth</h6>
 											<div class="col-md-4">
 											<label for="year" class="form-label">Select Year</label> 
-											<select class="form-select" id="year" name="year" >
+											<select class="form-select form-select-sm" id="year" name="year" >
 											
 										    </select>
 											</div>	
 											<div class="col-md-4">
 											<label for="month" class="form-label">Select Month</label> 
-											<select class="form-select"
+											<select class="form-select form-select-sm"
 											id="month" name="month">
 											
 										</select>
 											</div>
 											<div class="col-md-4">
 											<label for="day" class="form-label">Select Day</label>
-											 <select class="form-select"
+											 <select class="form-select form-select-sm"
 											id="day" name="day">
 											
 										</select>
@@ -150,21 +151,21 @@
 									<div class="mb-3">
 										<label for="country" class="form-label">Select
 											Country</label> 
-											<select class="form-select"
+											<select class="form-select form-select-sm"
 											id="country" name="country">
 											
 										</select>
 									</div>
 									<div class="mb-3">
 										<label for="state" class="form-label">Select
-											State</label> <select class="form-select"
+											State</label> <select class="form-select form-select-sm"
 											id="state" name="state">
 											
 										</select>
 									</div>
 									<div class="mb-3">
 										<label for="city" class="form-label">Select
-											City</label> <select class="form-select"
+											City</label> <select class="form-select form-select-sm"
 											id="city" name="city">
 											
 										</select>
@@ -210,9 +211,14 @@
 <script src="resources/js/core.js"></script>
 <script src="resources/js/feather.min.js"></script>
 <script src="resources/js/template.js"></script>
+<script src="resources/js/sweetalert2.min.js"></script>
+<!-- <script src="resources/js/select2.min.js"></script> -->
 <script type="text/javascript">
 $(document).ready(function(){
+	//$("select").select2();
+	//functions trigger on pageload  
 	fetchYears();
+	fetchCountries();
 	
 	$('#year').change(function(){
 		$('#month').empty();
@@ -226,16 +232,28 @@ $(document).ready(function(){
 			fetchDays($('#year').val(),$('#month').val());
 		}
 	})
-	
+	$('#country').change(function(){
+		$('#state').empty();
+		$('#city').empty();
+		if($(this).val() !== ''){
+			fetchStates($('#country').val());
+		}
+	})
+	$('#state').change(function(){
+		$('#city').empty();
+		if($(this).val() !== ''){
+			fetchCities($('#state').val());
+		}
+	})
 	
 });
+
 function fetchYears()	{
 	$.ajax({
 		url : 'fetchYears',
 		type : 'GET',
 		success : function(response)	{
-			console.log(response);
-			$('#year').append(new Option('---Select year---',''));
+			$('#year').append(new Option('======== SELECT YEAR ========',''));
 			$.each(response.years,function(key,year){
 				$('#year').append(new Option(year,year));
 			});
@@ -247,13 +265,13 @@ function fetchYears()	{
 		}
 	});
 }
+
 function fetchMonths()	{
 	$.ajax({ 
 		url:'fetchMonths',
 		type:'GET',
 		success: function(response)   {
-			console.log(response);
-			$('#month').append(new Option('---Select month---',''));
+			$('#month').append(new Option('======== SELECT MONTH ========',''));
 			$.each(response.months,function(key,month){
 				$('#month').append(new Option(month,month));
 			});
@@ -263,7 +281,6 @@ function fetchMonths()	{
 			console.log(status);
 			console.log(errorMsg);
 		} 
-		
 	});
 }
 
@@ -281,8 +298,7 @@ function fetchDays(year,month) {
 				'Content-Type':'application/json'
 			},
 			success: function(response) {
-				console.log(response)
-				$('#day').append(new Option('---Select day---',''));
+				$('#day').append(new Option('======== SELECT DAY ========',''));
 				$.each(response.days,function(key,day){
 					$('#day').append(new Option(day,day));
 				});
@@ -294,5 +310,80 @@ function fetchDays(year,month) {
 			}
 	});
 }
+
+function fetchCountries(){
+	$.ajax({
+		url:'fetchCountries',
+		type:'GET',
+		success: function(response){
+			$('#country').append(new Option('======== SELECT COUNTRY ========',''));
+			$.each(response.countries,function(key,country){
+				$('#country').append(new Option(country.countryName,country.countryId));
+			});
+		},
+		error: function(xhr,status,errorMsg){
+			console.log(xhr);
+			console.log(status);
+			console.log(errorMsg);
+		}
+	});
+}
+
+function fetchStates(countryId){
+	var reqPayload={
+			'countryId':countryId
+	}
+	$.ajax({
+		url:'fetchStates',
+		type:'POST',
+		data: JSON.stringify(reqPayload),
+		headers:{
+			'Accept':'application/json',
+			'Content-Type':'application/json'
+		},
+		success: function(response){
+			$('#state').append(new Option('======== SELECT STATE ========',''));
+			$.each(response.states,function(key,state){
+				$('#state').append(new Option(state.stateName,state.stateId));
+			});
+		},
+		error: function(xhr,status,errorMsg){
+			Swal.fire({
+		        icon: 'error',
+		        title: status,
+		        text: xhr.responseText
+		      })
+		//	window.alert(xhr.responseText);
+		}
+	});
+}
+
+ function fetchCities(stateId){
+	 var reqPayload ={
+			 'stateId':stateId
+	 }
+	 $.ajax({
+		 url: 'fetchCities',
+		 type: 'POST',
+		 data: JSON.stringify(reqPayload),
+		 headers:{
+				'Accept':'application/json',
+				'Content-Type':'application/json'
+			},
+			success :function(response){
+				$('#city').append(new Option('======== SELECT CITY ========',''));
+				$.each(response.cities, function(key,city){
+					$('#city').append(new Option(city.cityName,city.cityId));
+				});
+			},
+			error: function(xhr,status,errorMsg){
+				Swal.fire({
+			        icon: 'error',
+			        title: status,
+			        text: xhr.responseText
+			      })
+			}
+	 });
+ }
 </script>
 </html>
