@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class StaffController {
 
-	@GetMapping("/home")
+	@GetMapping("/login")
 	public String getStaffHome() {
-		return "staff/home";
+		return "staff/login";
 	}
 }

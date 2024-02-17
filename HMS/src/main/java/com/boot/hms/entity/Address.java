@@ -47,6 +47,6 @@ public class Address {
 	private String pincode;
 	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "city_id",nullable = false)
-	private City cityId;
+	private City city;
 	
 }

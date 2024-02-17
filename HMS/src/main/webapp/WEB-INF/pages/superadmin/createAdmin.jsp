@@ -20,45 +20,8 @@
 </head>
 <body>
 	<div class="main-wrapper">
-
-		<!-- partial:../../partials/_sidebar.html -->
-		<jsp:include page="sideBar.jsp"></jsp:include>
-		<nav class="settings-sidebar">
-			<div class="sidebar-body">
-				<a href="#" class="settings-sidebar-toggler"> <i
-					data-feather="settings"></i>
-				</a>
-				<h6 class="text-muted mb-2">Sidebar:</h6>
-				<div class="mb-3 pb-3 border-bottom">
-					<div class="form-check form-check-inline">
-						<input type="radio" class="form-check-input"
-							name="sidebarThemeSettings" id="sidebarLight"
-							value="sidebar-light" checked> <label
-							class="form-check-label" for="sidebarLight"> Light </label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input type="radio" class="form-check-input"
-							name="sidebarThemeSettings" id="sidebarDark" value="sidebar-dark">
-						<label class="form-check-label" for="sidebarDark"> Dark </label>
-					</div>
-				</div>
-				<div class="theme-wrapper">
-					<h6 class="text-muted mb-2">Light Theme:</h6>
-					<a class="theme-item active" href="../../dashboard.html"> <img
-						src="../../../assets/images/screenshots/light.jpg"
-						alt="light theme">
-					</a>
-					<h6 class="text-muted mb-2">Dark Theme:</h6>
-					<a class="theme-item"
-						href="https://www.nobleui.com/html/template/demo2/dashboard.html">
-						<img src="../../../assets/images/screenshots/dark.jpg"
-						alt="light theme">
-					</a>
-				</div>
-			</div>
-		</nav>
-		<!-- partial -->
-
+	<jsp:include page="sideBar.jsp"></jsp:include>
+		
 		<div class="page-wrapper">
 			<jsp:include page="header.jsp"></jsp:include>
 			<div class="page-content">
@@ -67,7 +30,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h6 class="card-title">Add personal details</h6>
-								<form>
+								<form  id="detailsForm">
 									<div class="mb-3">
 										<label for="userName" class="form-label">User
 											Name</label> <input type="text" class="form-control form-control-sm"
@@ -76,46 +39,46 @@
 									</div>
 
 									<div class="mb-3">
-										<label for="password" class="form-label">Password</label>
+										<label for="userPassword" class="form-label">Password</label>
 										<input type="password" class="form-control form-control-sm"
-											id="password"
-											placeholder="Enter Password",name="password">
+											id="userPassword"
+											placeholder="Enter Password" name="userPassword">
 									</div>
 
 									<div class="mb-3">
-										<label for="confirmPassword" class="form-label">Confirm
+										<label for="userConfirmPassword" class="form-label">Confirm
 											Password</label> <input type="password"
-											class="form-control form-control-sm" id="confirmPassword"
-											placeholder="ReEnter Password",name="confirmPassword">
+											class="form-control form-control-sm" id="userConfirmPassword"
+											placeholder="ReEnter Password" name="userConfirmPassword">
 									</div>
 
 									<div class="mb-3">
-										<label for="email" class="form-label">
+										<label for="userEmail" class="form-label">
 											Email</label> <input type="email"
-											class="form-control form-control-sm" id="email"
-											 placeholder="Enter Email",name="email">
+											class="form-control form-control-sm" id="userEmail"
+											 placeholder="Enter Email" name="userEmail">
 									</div>
 
 									
 									<div class="row mb-3">
 									<h6 style="text-align: center;color: purple;">Date of birth</h6>
 											<div class="col-md-4">
-											<label for="year" class="form-label">Select Year</label> 
-											<select class="form-select form-select-sm" id="year" name="year" >
+											<label for="userYear" class="form-label">Select Year</label> 
+											<select class="form-select form-select-sm" id="userYear" name="userYear" >
 											
 										    </select>
 											</div>	
 											<div class="col-md-4">
-											<label for="month" class="form-label">Select Month</label> 
+											<label for="userMonth" class="form-label">Select Month</label> 
 											<select class="form-select form-select-sm"
-											id="month" name="month">
+											id="userMonth" name="userMonth">
 											
 										</select>
 											</div>
 											<div class="col-md-4">
-											<label for="day" class="form-label">Select Day</label>
+											<label for="userDay" class="form-label">Select Day</label>
 											 <select class="form-select form-select-sm"
-											id="day" name="day">
+											id="userDay" name="userDay">
 											
 										</select>
 											</div>
@@ -125,77 +88,77 @@
 									<div class="mb-3">
 										<div class="form-check form-check-inline">
 											<input type="radio" class="form-check-input"
-												name="gender" id="male"> <label
-												class="form-check-label" for="male"> Male </label>
+												name="userGender" id="userGender" value="male"> <label
+												class="form-check-label" for="userGender"> Male </label>
 										</div>
 										<div class="form-check form-check-inline">
 											<input type="radio" class="form-check-input"
-												name="gender" id="female"> <label
-												class="form-check-label" for="female"> Female
+												name="userGender" id="userGender" value="female"> <label
+												class="form-check-label" for="userGender"> Female
 											</label>
 										</div>
 										<div class="form-check form-check-inline">
 											<input type="radio" class="form-check-input"
-												name="gender" id="other"> <label
-												class="form-check-label" for="other"> Other </label>
+												name="userGender" id="userGender" value="others"> <label
+												class="form-check-label" for="userGender"> Other </label>
 										</div>
 									</div>
 
 									<div class="mb-3">
-										<label for="mobileNumber" class="form-label">Mobile
+										<label for="userMobileNo" class="form-label">Mobile
 											number</label> <input type="text"
-											class="form-control form-control-sm" id="mobileNumber"
-											 placeholder="Enter mobile number" name="mobileNumber">
+											class="form-control form-control-sm" id="userMobileNo"
+											 placeholder="Enter mobile number" name="userMobileNo">
 									</div>
 									<h6 class="card-title mt-5">Add address</h6>
 									<div class="mb-3">
-										<label for="country" class="form-label">Select
+										<label for="userAddress_countryId" class="form-label">Select
 											Country</label> 
 											<select class="form-select form-select-sm"
-											id="country" name="country">
+											id="userAddress_countryId" name="userAddress_countryId">
 											
 										</select>
 									</div>
 									<div class="mb-3">
-										<label for="state" class="form-label">Select
+										<label for="userAddress_stateId" class="form-label">Select
 											State</label> <select class="form-select form-select-sm"
-											id="state" name="state">
+											id="userAddress_stateId" name="userAddress_stateId">
 											
 										</select>
 									</div>
 									<div class="mb-3">
-										<label for="city" class="form-label">Select
+										<label for="userAddress_cityId" class="form-label">Select
 											City</label> <select class="form-select form-select-sm"
-											id="city" name="city">
+											id="userAddress_cityId" name="userAddress_cityId">
 											
 										</select>
 									</div>
 									<div class="mb-3">
-										<label for="addressLine" class="form-label">Address
+										<label for="userAddress_addressLine" class="form-label">Address
 											line</label> <input type="text" class="form-control form-control-sm"
-											id="addressLine" 
-											placeholder="Enter Addressline" name="addressLine">
+											id="userAddress_addressLine" 
+											placeholder="Enter Addressline" name="userAddress_addressLine">
 									</div>
 									<div class="mb-3">
-										<label for="doorNo" class="form-label">Door
+										<label for="userAddress_doorNo" class="form-label">Door
 											no</label> <input type="text" class="form-control form-control-sm"
-											id="doorNo"
-											placeholder="Enter Doornumber" name="doorNo">
+											id="userAddress_doorNo"
+											placeholder="Enter Doornumber" name="userAddress_doorNo">
 									</div>
 									<div class="mb-3">
-										<label for="landmark" class="form-label">Landmark</label>
+										<label for="userAddress_landmark" class="form-label">Landmark</label>
 										<input type="text" class="form-control form-control-sm"
-											id="landmark" 
-											placeholder="Enter Landmark" name="landmark">
+											id="userAddress_landmark" 
+											placeholder="Enter Landmark" name="userAddress_landmark">
 									</div>
 									<div class="mb-3">
-										<label for="pincode" class="form-label">Pincode</label>
+										<label for="userAddress_pincode" class="form-label">Pincode</label>
 										<input type="text" class="form-control form-control-sm"
-											id="pincode" 
-											placeholder="Enter Pincode" name="pincode">
+											id="userAddress_pincode" 
+											placeholder="Enter Pincode" name="userAddress_pincode">
 									</div>
 
-									<button class="btn btn-primary" type="submit">Create
+									<button class="btn btn-primary" type="button" id="formBtn" >Create
 										admin</button>
 								</form>
 							</div>
@@ -213,6 +176,7 @@
 <script src="resources/js/template.js"></script>
 <script src="resources/js/sweetalert2.min.js"></script>
 <!-- <script src="resources/js/select2.min.js"></script> -->
+<script src="resources/js/jquery.validate.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	//$("select").select2();
@@ -220,31 +184,188 @@ $(document).ready(function(){
 	fetchYears();
 	fetchCountries();
 	
-	$('#year').change(function(){
-		$('#month').empty();
+	$('#userYear').change(function(){
+		$('#userMonth').empty();
+		$('#userDay').empty();
 		if($(this).val() !== '')	{
 			fetchMonths();
 		}
 	})
-	$('#month').change(function(){
-		$('#day').empty();
+	$('#userMonth').change(function(){
+		$('#userDay').empty();
 		if($(this).val() !== ''){
-			fetchDays($('#year').val(),$('#month').val());
+			fetchDays($('#userYear').val(),$('#userMonth').val());
 		}
 	})
-	$('#country').change(function(){
-		$('#state').empty();
-		$('#city').empty();
+	$('#userAddress_countryId').change(function(){
+		$('#userAddress_stateId').empty();
+		$('#userAddress_cityId').empty();
 		if($(this).val() !== ''){
-			fetchStates($('#country').val());
+			fetchStates($('#userAddress_countryId').val());
 		}
 	})
-	$('#state').change(function(){
-		$('#city').empty();
+	$('#userAddress_stateId').change(function(){
+		$('#userAddress_cityId').empty();
 		if($(this).val() !== ''){
-			fetchCities($('#state').val());
+			fetchCities($('#userAddress_stateId').val());
 		}
 	})
+	
+	$('#formBtn').click(function(){
+		let resp = $('#detailsForm').valid();
+		console.log(resp);
+		if(resp==true){
+			var reqPayload ={
+					'userName': $('#userName').val(),
+					'userPassword':$('#userPassword').val(),
+					'userConfirmPassword':$('#userConfirmPassword').val(),
+					'userEmail':$('#userEmail').val(),
+					'userYear':$('#userYear').val(),
+					'userMonth':$('#userMonth').val(),
+					'userDay':$('#userDay').val(),
+					'userMobileNo':$('#userMobileNo').val(),
+					'userGender':$('#userGender').val(),
+					'userAddress':{
+						'addressLine':$('#userAddress_addressLine').val(),
+						'doorNo':$('#userAddress_doorNo').val(),
+						'landmark':$('#userAddress_landmark').val(),
+						'pincode':$('#userAddress_pincode').val(),
+						'cityId':$('#userAddress_cityId').val(),
+						'stateId':$('#userAddress_stateId').val(),
+						'countryId':$('#userAddress_countryId').val()
+					}
+			}
+			saveAdminDetails(reqPayload);
+		}
+		console.log(reqPayload);
+	});
+	
+	$('#detailsForm').validate({
+		rules:{
+			userName:{
+				required:true,
+				minlength:2
+			},
+			userPassword:{
+				required:true,
+				minlength:5
+			},
+			userConfirmPassword:{
+				required:true,
+				minlength:5,
+				equalTo: "#userPassword"
+			},
+			userEmail:{
+				required:true,
+				email:true
+			},
+			userYear:"required",
+			userMonth:"required",
+			userDay:"required",
+			userGender:"required",
+			userMobileNo:{
+				required:true,
+				minlength:10,
+				maxlength:10
+			},
+			userAddress_countryId:"required",
+			userAddress_stateId:"required",
+			userAddress_cityId:"required",
+			userAddress_addressLine:{
+				required:true,
+				minlength:10,
+				maxlength:50
+			},
+			userAddress_doorNo:"required",
+			userAddress_landmark:{
+				required:true,
+				minlength:10,
+				maxlength:30
+			},
+			userAddress_pincode:{
+				required:true,
+				minlength:6,
+				maxlength:6
+			}
+		},
+		
+		messages:{
+			userName:{
+				required:"Please enter your username",
+				minlength:"Your username must be of atleast 2 characters"
+			},
+			userPassword:{
+				required:"Please enter your password",
+				minlength:"Your password must be of atleast 5 characters long"
+			},
+			userConfirmPassword:{
+				required:"Please enter your password",
+				minlength:"Your password must be of atleast 5 characters long",
+				equalTo: "Please The Same Password As Above"
+			},
+			userEmail:{
+				required:"Please enter your email",
+				email:"Please enter valid email"
+			},
+			userYear:"Please select year",
+			userMonth:"Please select month",
+			userDay:"Please select day",
+			userMobileNo:{
+				required:"Please enter your mobile number",
+				userGender:"Please select your gender",
+			minlength:"Please enter valid mobile number",
+				maxlength:"Please enter valid mobile number"
+			},
+			userAddress_countryId:"Please select your country",
+			userAddress_stateId:"Please select  your state",
+			userAddress_cityId:"Please select your city",
+			userAddress_addressLine:{
+				required:"Please enter your addressline",
+				minlength:"Your address should be longer",
+				maxlength:"Your address should be shorter"
+			},
+			userAddress_doorNo: "Please enter your doorno",
+			userAddress_landmark:{
+				required:"Please enter your landmark",
+				minlength:"Your landmark should be longer",
+				maxlength:"Your landmark should be shorter"
+			},
+			userAddress_pincode:{
+				required:"Please enter your pincode",
+				minlength:"Your pincode should be 6 characters",
+				maxlength:"Your pincode should be 6 characters"
+			}
+		},
+		
+		errorPlacement: function(error, element) {
+	        error.addClass( "invalid-feedback" );
+
+	        if (element.parent('.input-group').length) {
+	          error.insertAfter(element.parent());
+	        }
+	        else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+	          error.insertAfter(element.parent().parent());
+	        }
+	        else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+	          error.appendTo(element.parent().parent());
+	        }
+	        else {
+	          error.insertAfter(element);
+	        }
+	      },
+	      
+	      highlight: function(element, errorClass) {
+	          if ($(element).prop('type') != 'checkbox' && $(element).prop('type') != 'radio') {
+	            $( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
+	          }
+	        },
+	        
+	        unhighlight: function(element, errorClass) {
+	            if ($(element).prop('type') != 'checkbox' && $(element).prop('type') != 'radio') {
+	              $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
+	            }
+	          }
+	});
 	
 });
 
@@ -253,9 +374,9 @@ function fetchYears()	{
 		url : 'fetchYears',
 		type : 'GET',
 		success : function(response)	{
-			$('#year').append(new Option('======== SELECT YEAR ========',''));
+			$('#userYear').append(new Option('======== SELECT YEAR ========',''));
 			$.each(response.years,function(key,year){
-				$('#year').append(new Option(year,year));
+				$('#userYear').append(new Option(year,year));
 			});
 		},
 		error : function(xhr,status,errorMsg)	{
@@ -271,9 +392,9 @@ function fetchMonths()	{
 		url:'fetchMonths',
 		type:'GET',
 		success: function(response)   {
-			$('#month').append(new Option('======== SELECT MONTH ========',''));
+			$('#userMonth').append(new Option('======== SELECT MONTH ========',''));
 			$.each(response.months,function(key,month){
-				$('#month').append(new Option(month,month));
+				$('#userMonth').append(new Option(month,month));
 			});
 		},
 		error : function(xhr,status,errorMsg)  {
@@ -298,9 +419,9 @@ function fetchDays(year,month) {
 				'Content-Type':'application/json'
 			},
 			success: function(response) {
-				$('#day').append(new Option('======== SELECT DAY ========',''));
+				$('#userDay').append(new Option('======== SELECT DAY ========',''));
 				$.each(response.days,function(key,day){
-					$('#day').append(new Option(day,day));
+					$('#userDay').append(new Option(day,day));
 				});
 			},
 			error:function(xhr,status,errorMsg){
@@ -316,9 +437,9 @@ function fetchCountries(){
 		url:'fetchCountries',
 		type:'GET',
 		success: function(response){
-			$('#country').append(new Option('======== SELECT COUNTRY ========',''));
+			$('#userAddress_countryId').append(new Option('======== SELECT COUNTRY ========',''));
 			$.each(response.countries,function(key,country){
-				$('#country').append(new Option(country.countryName,country.countryId));
+				$('#userAddress_countryId').append(new Option(country.countryName,country.countryId));
 			});
 		},
 		error: function(xhr,status,errorMsg){
@@ -342,9 +463,9 @@ function fetchStates(countryId){
 			'Content-Type':'application/json'
 		},
 		success: function(response){
-			$('#state').append(new Option('======== SELECT STATE ========',''));
+			$('#userAddress_stateId').append(new Option('======== SELECT STATE ========',''));
 			$.each(response.states,function(key,state){
-				$('#state').append(new Option(state.stateName,state.stateId));
+				$('#userAddress_stateId').append(new Option(state.stateName,state.stateId));
 			});
 		},
 		error: function(xhr,status,errorMsg){
@@ -371,10 +492,36 @@ function fetchStates(countryId){
 				'Content-Type':'application/json'
 			},
 			success :function(response){
-				$('#city').append(new Option('======== SELECT CITY ========',''));
+				$('#userAddress_cityId').append(new Option('======== SELECT CITY ========',''));
 				$.each(response.cities, function(key,city){
-					$('#city').append(new Option(city.cityName,city.cityId));
+					$('#userAddress_cityId').append(new Option(city.cityName,city.cityId));
 				});
+			},
+			error: function(xhr,status,errorMsg){
+				Swal.fire({
+			        icon: 'error',
+			        title: status,
+			        text: xhr.responseText
+			      })
+			}
+	 });
+ }
+ 
+ function saveAdminDetails(reqPayload){
+	 $.ajax({
+		 url: 'saveAdmin',
+		 type: 'POST',
+		 data: JSON.stringify(reqPayload),
+		 headers:{
+				'Accept':'application/json',
+				'Content-Type':'application/json'
+			},
+			success :function(response){
+				console.log(response);
+				Swal.fire({
+			        icon: 'success',
+			        title: response.Message
+			      });
 			},
 			error: function(xhr,status,errorMsg){
 				Swal.fire({

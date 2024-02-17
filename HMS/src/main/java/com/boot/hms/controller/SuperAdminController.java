@@ -21,12 +21,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.boot.hms.dto.CityDto;
 import com.boot.hms.dto.CountryDto;
 import com.boot.hms.dto.StateDto;
+import com.boot.hms.dto.UserAccountDto;
 import com.boot.hms.service.CityService;
 import com.boot.hms.service.CountryService;
 import com.boot.hms.service.StateService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RequestMapping("/superadmin")
 @Controller
+
 public class SuperAdminController {
 
 	@Autowired
@@ -135,5 +139,15 @@ public class SuperAdminController {
 			responseMap.put("cities", dtoList);
 			return new  ResponseEntity<>(responseMap,HttpStatus.OK);
 		}
+	}
+	
+	@PostMapping("/saveAdmin")
+	public ResponseEntity<?> saveAdmin(@RequestBody UserAccountDto reqPayload){
+		System.out.println("===================saving admin details=======================");
+		System.out.println("req details->"+reqPayload.toString());
+		Map<String, String> respMap = new HashMap<>();
+		respMap.put("Message", "Saved Admin successfully...");
+		return  new ResponseEntity<>(respMap,HttpStatus.OK);
+		
 	}
 }

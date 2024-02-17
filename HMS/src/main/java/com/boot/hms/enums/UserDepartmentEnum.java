@@ -1,0 +1,6 @@
+package com.boot.hms.enums;
+
+public enum UserDepartmentEnum {
+
+	FRONT_DESK_DEPT,HOUSE_KEEPING_DEPT,SECURITY_DEPT,ADMIN_DEPT,SUPER_ADMIN_DEPT,MAINTENANCE_DEPT
+}
