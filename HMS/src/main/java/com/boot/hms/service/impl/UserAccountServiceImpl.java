@@ -1,5 +1,7 @@
 package com.boot.hms.service.impl;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,6 +59,8 @@ public class UserAccountServiceImpl implements UserAccountService {
 				address.setDoorNo(addressDto.getDoorNo());
 				address.setLandMark(addressDto.getLandmark());
 				address.setPincode(addressDto.getPincode());
+				address.setCreatedTime(LocalDateTime.now());
+				address.setModifiedTime(LocalDateTime.now());
 				address = addressRepo.save(address);
 			
 		//preparing user department entity	
@@ -70,7 +74,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 		userAccount.setUserDob(userAccountDto.getUserDay()+"-"+
 		userAccountDto.getUserMonth()+"-"+
 				userAccountDto.getUserYear());
-		userAccount.setUserGender(GenderEnum.valueOf(userAccountDto.getUserGender()));
+		userAccount.setUserGender(GenderEnum.valueOf(userAccountDto.getUserGender().toUpperCase()));
 		userAccount.setUserMobileNo(userAccountDto.getUserMobileNo());
 		userAccount.setUserRole(UserRoleEnum.valueOf(userAccountDto.getUserRole()));
 		userAccount.setUserAddress(address);
@@ -82,6 +86,21 @@ public class UserAccountServiceImpl implements UserAccountService {
 		serverResponseDto.setResponseMessage("User Saved Successfully");
 		serverResponseDto.setResponseStatus("SUCCESS");
 		return serverResponseDto;
+	}
+
+	@Override
+	public boolean doesEmailExists(String email) {
+		return 	userAccountRepo.findByUserEmail(email) != null ? true : false; 
+	}
+
+	@Override
+	public boolean doesMobileNumberExists(String mobileNo) {
+		return userAccountRepo.findByUserMobileNo(mobileNo) != null ? true : false;
+	}
+
+	@Override
+	public boolean doesUsernameExists(String username) {
+	return userAccountRepo.findByUserName(username) != null ? true : false;
 	}
 
 }

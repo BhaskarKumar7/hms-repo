@@ -14,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -49,7 +50,7 @@ public class UserAccount {
 	@Column(name = "user_role",nullable = false)
 	@Enumerated(EnumType.STRING)
 	private UserRoleEnum userRole;
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_dept_id",nullable = false)
 	private UserDepartment userDepartment;
 }

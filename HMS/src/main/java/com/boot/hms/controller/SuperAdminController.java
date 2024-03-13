@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,17 +21,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boot.hms.dto.CityDto;
 import com.boot.hms.dto.CountryDto;
+import com.boot.hms.dto.ServerResponseDto;
 import com.boot.hms.dto.StateDto;
 import com.boot.hms.dto.UserAccountDto;
+import com.boot.hms.dto.UserDepartmentDto;
+import com.boot.hms.exception.InvalidInputException;
 import com.boot.hms.service.CityService;
 import com.boot.hms.service.CountryService;
 import com.boot.hms.service.StateService;
+import com.boot.hms.service.UserAccountService;
 
-import lombok.extern.slf4j.Slf4j;
+import jakarta.validation.Valid;
 
 @RequestMapping("/superadmin")
 @Controller
-
+@Validated
 public class SuperAdminController {
 
 	@Autowired
@@ -39,6 +44,8 @@ public class SuperAdminController {
 	private StateService stateService;
 	@Autowired
 	private CityService cityService;
+	@Autowired
+	private UserAccountService userAccountService;
 	
 	@GetMapping("/login")
 	public String getLoginPage() {
@@ -142,12 +149,36 @@ public class SuperAdminController {
 	}
 	
 	@PostMapping("/saveAdmin")
-	public ResponseEntity<?> saveAdmin(@RequestBody UserAccountDto reqPayload){
+	public ResponseEntity<?> saveAdmin(@RequestBody @Valid UserAccountDto reqPayload){
 		System.out.println("===================saving admin details=======================");
-		System.out.println("req details->"+reqPayload.toString());
-		Map<String, String> respMap = new HashMap<>();
-		respMap.put("Message", "Saved Admin successfully...");
-		return  new ResponseEntity<>(respMap,HttpStatus.OK);
+		boolean isEmailExists = userAccountService.doesEmailExists(reqPayload.getUserEmail());
+		boolean isMobileNoExists = userAccountService.doesMobileNumberExists(reqPayload.getUserMobileNo());
+		boolean isUsernameExists = userAccountService.doesUsernameExists(reqPayload.getUserName());
+		List<String> errMsgs = new ArrayList<>();
+		if(isEmailExists) //default checks for true
+		{
+			errMsgs.add("Email already exists");
+		}
+		if(isMobileNoExists) {
+			errMsgs.add("Mobile number alredy exists");
+		}
+		if(isUsernameExists) {
+			errMsgs.add("Username already exists");
+		}
+		if(!reqPayload.getUserPassword().equals(reqPayload.getUserConfirmPassword())) {
+			errMsgs.add("Passwords must Match");
+		}
+		if(!errMsgs.isEmpty()) {
+			throw new InvalidInputException(errMsgs);
+		}
+		
+		reqPayload.getUserAddress().setAddressType("ADMIN_ADDRESS");
+		UserDepartmentDto userDepartmentDto = new UserDepartmentDto();
+		userDepartmentDto.setUserDeptName("ADMIN_DEPT");
+		reqPayload.setUserDepartment(userDepartmentDto);
+		reqPayload.setUserRole("ROLE_ADMIN");
+		ServerResponseDto responseDto = userAccountService.createUserAccount(reqPayload);
+		return  new ResponseEntity<>(responseDto,HttpStatus.OK);
 		
 	}
 }

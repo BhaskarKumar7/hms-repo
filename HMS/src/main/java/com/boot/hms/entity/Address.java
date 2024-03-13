@@ -30,7 +30,7 @@ public class Address {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "address_generator")
 	@Column(name = "address_id",unique = true )
 	private Integer addressId;
-	@Column(name = "address_line",unique = true,nullable = false)
+	@Column(name = "address_line",nullable = false)
 	private String addressLine;
 	@Column(name = "address_type",nullable = false)
 	@Enumerated(EnumType.STRING)

@@ -215,6 +215,7 @@ $(document).ready(function(){
 		let resp = $('#detailsForm').valid();
 		console.log(resp);
 		if(resp==true){
+			$(this).prop("disabled", true);
 			var reqPayload ={
 					'userName': $('#userName').val(),
 					'userPassword':$('#userPassword').val(),
@@ -274,13 +275,13 @@ $(document).ready(function(){
 			userAddress_addressLine:{
 				required:true,
 				minlength:10,
-				maxlength:50
+				maxlength:200
 			},
 			userAddress_doorNo:"required",
 			userAddress_landmark:{
 				required:true,
 				minlength:10,
-				maxlength:30
+				maxlength:150
 			},
 			userAddress_pincode:{
 				required:true,
@@ -518,19 +519,32 @@ function fetchStates(countryId){
 			},
 			success :function(response){
 				console.log(response);
+				document.getElementById('detailsForm').reset();
+				$('#formBtn').prop("disabled", false);
 				Swal.fire({
 			        icon: 'success',
-			        title: response.Message
+			        title: response.responseMessage
 			      });
+				clearFormCss();
 			},
 			error: function(xhr,status,errorMsg){
+				$('#formBtn').prop("disabled", false);
 				Swal.fire({
 			        icon: 'error',
 			        title: status,
-			        text: xhr.responseText
-			      })
+			        text: xhr.responseJSON.errorsList
+				});
+				  console.log(xhr);
+			      console.log(errorMsg);
 			}
 	 });
+ }
+ 
+ function clearFormCss(){
+	 var elements = document.getElementById('detailsForm').elements;
+	 for(var i=0; i<elements.length; i++){
+		 elements[i].classList.remove("is-valid");
+	 }
  }
 </script>
 </html>
