@@ -61,6 +61,11 @@ public class SuperAdminController {
 	public String createAdmin() {
 		return "superadmin/createAdmin";
 	}
+	
+	@GetMapping("/adminList")
+	public String getAdminList() {
+		return "superadmin/adminList";
+	}
 
 	@GetMapping("/fetchYears")
 	@ResponseBody

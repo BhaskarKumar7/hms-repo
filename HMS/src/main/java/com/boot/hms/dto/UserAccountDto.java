@@ -23,6 +23,10 @@ public class UserAccountDto implements Serializable {
 	@NotBlank(message = "Please enter your username")
 	@Size(min = 2,max = 20,message = "Your username must have min 2 characters and max 20 characters")
 	private String userName;
+	@NotNull(message = "Full name should not be null")
+	@NotBlank(message = "Please enter your fullname")
+	@Size(min = 2,max = 20,message = "Your fullname must have min 2 characters and max 20 characters")
+	private String userFullName;
 	@NotNull(message = "Password Should not be null")
 	@NotBlank(message = "Please enter your password")
 	@Min(value = 5,message = "Your password must be of atleast 5 characters long")

@@ -33,6 +33,8 @@ public class UserAccount {
 	private Integer userId;
 	@Column(name = "user_name",nullable = false,unique = true)
 	private String userName;
+	@Column(name = "user_full_name")
+	private String userFullName;
 	@Column(name = "user_password",nullable = false,unique = true)
 	private String userPassword;
 	@Column(name = "user_email",nullable = false,unique = true)

@@ -69,6 +69,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 				
 		UserAccount userAccount = new UserAccount();
 		userAccount.setUserName(userAccountDto.getUserName());
+		userAccount.setUserFullName(userAccountDto.getUserFullName());
 		userAccount.setUserPassword(BcryptUtility.generateHash(userAccountDto.getUserPassword()));
 		userAccount.setUserEmail(userAccountDto.getUserEmail());
 		userAccount.setUserDob(userAccountDto.getUserDay()+"-"+

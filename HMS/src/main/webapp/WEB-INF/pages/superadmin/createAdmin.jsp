@@ -37,7 +37,14 @@
 											id="userName" 
 											placeholder="Enter UserName" name="userName">
 									</div>
-
+										
+										<div class="mb-3">
+										<label for="userFullName" class="form-label">Full Name
+										</label> <input type="text" class="form-control form-control-sm"
+											id="userFullName" 
+											placeholder="Enter FullName" name="userFullName">
+									</div>
+										
 									<div class="mb-3">
 										<label for="userPassword" class="form-label">Password</label>
 										<input type="password" class="form-control form-control-sm"
@@ -218,6 +225,7 @@ $(document).ready(function(){
 			$(this).prop("disabled", true);
 			var reqPayload ={
 					'userName': $('#userName').val(),
+					'userFullName': $('#userFullName').val(),
 					'userPassword':$('#userPassword').val(),
 					'userConfirmPassword':$('#userConfirmPassword').val(),
 					'userEmail':$('#userEmail').val(),
@@ -244,6 +252,10 @@ $(document).ready(function(){
 	$('#detailsForm').validate({
 		rules:{
 			userName:{
+				required:true,
+				minlength:2
+			},
+			userFullName:{
 				required:true,
 				minlength:2
 			},
@@ -294,6 +306,10 @@ $(document).ready(function(){
 			userName:{
 				required:"Please enter your username",
 				minlength:"Your username must be of atleast 2 characters"
+			},
+			userFullName:{
+				required:"Please enter your fullname",
+				minlength:"Your fullname must be of atleast 2 characters"
 			},
 			userPassword:{
 				required:"Please enter your password",

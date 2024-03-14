@@ -9,11 +9,11 @@
 	<div class="sidebar-body">
 		<ul class="nav">
 			<li class="nav-item nav-category">SUPER ADMIN MENU</li>
-			<li class="nav-item"><a href="#"
+			<li class="nav-item"><a href="createAdmin"
 				class="nav-link"> <i class="link-icon"
 					data-feather="message-square"></i> <span class="link-title">Create admin</span>
 			</a></li>
-			<li class="nav-item"><a href="#"
+			<li class="nav-item"><a href="adminList"
 				class="nav-link"> <i class="link-icon"
 					data-feather="message-square"></i> <span class="link-title">Admin list</span>
 			</a></li>
